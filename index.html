@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <!-- The header of the page-->
+    <header class="mb-2 p-3 row-md text-center text-white">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <main class="row m-2">
+        <!-- Section of search and search history -->
+        <section class="col-lg-3 text-dark d-flex flex-column">
+            <h3>Search for a city</h3>
+            <form id="search-form">
+                <div>
+                    <!--Input to search for city-->
+                    <input name="city" id="city-input" type="text" class="form-control" placeholder="Minneapolis"
+                        autofocus="true" />
+                    <!--Search button-->
+                    <button type="submit" class="form-control btn mt-2 mb-2">Search</button>                    
+                </div>
+                <div>
+                    <button id="clear-history" type="button" class="form-control btn mb-2">
+                        <p class="text-white">Clear search history</p>
+                    </button>
+                </div>
+            </form>
+            <ul id="search-history" class="list-group">
+                <!-- Search history (cities) -->
+            </ul>
+
+        </section>
+
+
+        <div class="col-lg-9">
+            <!-- Search result for today weather-->
+            <section id="currentWeather-container" class="pb-2 m-auto col-10 border">
+                <div>
+                    <p id="currentDay"></p>               
+                    <h3 class="city-name"><span id="city-name"></span><img id="weather-icon" /></h3>
+                    <p id="temp"></p>
+                    <p id="humidity"></p>
+                    <p id="wind-speed"></p>
+                    <div>
+                        <span id="uv-index"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search results for next five days -->
+            <section class="forecast-section bg-light m-1">
+              <h3 id="city-name"></h3>  
+              <h3 id="forecast-title">5-Day Forecast</h3>
+                <div id="forecast-container" class="fiveday-forecast">
+                    <div class="forecast-cards" id="card-deck">
+                        <img id="daily-icon" />
+                        <!-- search results for next five days here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
