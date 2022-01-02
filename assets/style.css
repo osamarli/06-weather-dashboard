@@ -33,16 +33,18 @@ border: solid #6993e7;
     font-size: 1.5vw;
 }
 
-.card-body {
+.tag-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   border: solid #6993e7;
+  gap: 1vw;
+  padding: 1.5vw;
 }
 
-.card-text {
-  font-size: 1.5vw;
+.tag-text {
+  font-size: 1.3vw;
   margin: 0px;
   padding: 0px;
 }
@@ -90,14 +92,14 @@ border: solid #6993e7;
         width: 100%;
     }
 
-    .card-body {
+    .tag-body {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
-    .card-text {
+    .tag-text {
         font-size: 2vw;
         margin: 0;
     }
