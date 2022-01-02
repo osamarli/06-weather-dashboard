@@ -169,6 +169,5 @@ deleteHistory.addEventListener("click", function(event){
 
 createCityList();
 
-//------------------------- Click handlers -------------------------//
 
 searchHistory.addEventListener("click", showSearchHistory);
