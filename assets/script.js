@@ -59,7 +59,6 @@ function createCityList() {
     }
 };
 
-//------------------ GET CITY AND WEATHER ----------------------
 var getCityWeather = function (cityName) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid='  + APIKey;
 
@@ -87,12 +86,10 @@ var getCityWeather = function (cityName) {
 // Click search
 searchFormEl.addEventListener("submit", searchCity);
 
-//------------------ DISPLAY WEATHER ----------------------//
-
-
+//Show weather details
 var displayWeather = function(data) {
 
-    //------------------ CURRENT WEATHER ----------------------//
+    //Current weather
     currentDate.textContent = new Date(data.current.dt * 1000).toLocaleDateString();
     weatherIcon.src = 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png';
     temperature.textContent = "Temperature: " + data.current.temp + "°F";
@@ -172,6 +169,5 @@ deleteHistory.addEventListener("click", function(event){
 
 createCityList();
 
-//------------------------- Click handlers -------------------------//
 
 searchHistory.addEventListener("click", showSearchHistory);
