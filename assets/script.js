@@ -1,18 +1,21 @@
-var searchFormEl = document.querySelector("#search-form");
-var cityInputEl = document.querySelector("#city-input");
+// Code of Weather Dashboard
+
+// Define city input and API Key
+var cityInput = document.querySelector("#city-input");
 var APIKey = "d1e2d0763204896fd894698f5c6e27ee";
 
 
+var searchFormEl = document.querySelector("#search-form");
 var currentDate = document.querySelector("#currentDay");
 var forecastTitle = document.querySelector("#forecast-title");
 //var forecastSection = document.querySelector("#forecast");
-var dailyForecast = document.querySelector("#daily");
-var cardDeck = document.querySelector("#card-deck");
-var currentWeatherDisplay = document.querySelector("#currentWeather-container");
+//var dailyForecast = document.querySelector("#daily");
+var forecastDays = document.querySelector("#forecast-days");
+var currentWeather = document.querySelector("#current-container");
 
-var fiveDayForecast = document.querySelector("#forecast-container");
+//var fiveDayForecast = document.querySelector("#forecast-container");
 
-currentWeatherDisplay.style.display = "none";
+currentWeather.style.display = "none";
 forecastTitle.style.display = "none";
 
 //------------------ WEATHER DETAILS ----------------------
@@ -26,26 +29,38 @@ var UVI = document.querySelector("#uv-index");
 
 //------------------ SEARCH HISTORY SECTION ----------------------
 var searchHistory = document.querySelector("#search-history");
-var clearSearchHistory = document.querySelector("#clear-history");
+var clearHistory = document.querySelector("#clear-history");
 
 
 //------------------ SEARCH CITY AND STORE SEARCH ----------------------
-var searchCity = function (event) {
+var searchCity = function (event,cityName) {
     event.preventDefault();
-    currentWeatherDisplay.style.display = "flex";
-    var cityName = cityInputEl.value.trim();
+    var cityName = cityInput.value;
     if (cityName) {
         getCityWeather(cityName);
-        cityInputEl.value = "";
+        cityInput.value = "";
         var searchedCity = JSON.parse(localStorage.getItem("CityList")) || [cityName];
         var storedCities = {city: cityName};
         searchedCity.push(storedCities);
 
         localStorage.setItem("CityList", JSON.stringify(searchedCity));
     } else {
-        alert("Enter a city name");
+        alert("You forgot to choose a city");
     }
     createCityList(searchedCity);
+};
+
+//Create search history list
+function createCityList() {
+    var searchedCities = JSON.parse(localStorage.getItem("CityList")) || [];
+    searchHistory.innerHTML="";
+     for (i = 1; i<searchedCities.length; i++){
+        var buttonEl = document.createElement("li");
+        buttonEl.classList = "list-group-item list-group-item-action list-group-item-dark";
+        buttonEl.setAttribute(`data-id`, i);
+        buttonEl.textContent = searchedCities[i].city;
+        searchHistory.appendChild(buttonEl);
+    }
 };
 
 //------------------ GET CITY AND WEATHER ----------------------
@@ -73,7 +88,12 @@ var getCityWeather = function (cityName) {
     });
 };
 
+// Click search
+searchFormEl.addEventListener("submit", searchCity);
+
 //------------------ DISPLAY WEATHER ----------------------//
+
+
 var displayWeather = function(data) {
 
     //------------------ CURRENT WEATHER ----------------------//
@@ -95,15 +115,16 @@ var displayWeather = function(data) {
     //------------------ 5 DAY FORECAST ----------------------//
     
     //---CLEAR OLD CONTENT ---//
-    cardDeck.textContent= "";
+    forecastDays.textContent= "";
     
     //---- LOOP THROUGH FIVE DAYS OF FORECASTS ----//
+    currentWeather.style.display = "block";
     forecastTitle.style.display = "block";
     
     for (i=0; i < 5; i++) {
         
         var card = document.createElement("div");
-        card.classList = "card bg-secondary border-primary";
+        card.classList = "card bg-secondary";
         var cardBody = document.createElement("div");
         cardBody.classList = "card-body";
         
@@ -126,7 +147,7 @@ var displayWeather = function(data) {
         windSpeedEl.classList = "card-text daily-weather-text";
         windSpeedEl.textContent = "Wind: " + data.daily[i].wind_speed + "MPH";
 
-        cardDeck.append(card);
+        forecastDays.append(card);
         card.append(cardBody);
         cardBody.appendChild(date);
         cardBody.appendChild(dailyIcon);
@@ -137,23 +158,12 @@ var displayWeather = function(data) {
     
 };
 
-//Create search history list
-function createCityList() {
-    var searchedCities = JSON.parse(localStorage.getItem("CityList")) || [];
-    searchHistory.innerHTML="";
-     for (i = 1; i<searchedCities.length; i++){
-        var buttonEl = document.createElement("li");
-        buttonEl.classList = "list-group-item list-group-item-action";
-        buttonEl.setAttribute(`data-id`, i);
-        buttonEl.textContent = searchedCities[i].city;
-        searchHistory.appendChild(buttonEl);
-    }
-};
+
 
 //------------------------- Render Search History -------------------------//
 var renderSearchHistory = function (event) {
     var searchedCities = JSON.parse(localStorage.getItem("CityList")) || [];
-    currentWeatherDisplay.style.display = "flex";
+    currentWeather.style.display = "block";
     var cityId = event.target.getAttribute("data-id");
     var cityIndex = searchedCities[cityId].city;
     console.log(cityIndex);
@@ -162,16 +172,16 @@ var renderSearchHistory = function (event) {
 
 
 //clear scearch history
-clearSearchHistory.addEventListener("click", function(event){
+clearHistory.addEventListener("click", function(event){
     localStorage.clear(event);
     searchHistory.textContent = "";
-    cardDeck.textContent= "";
-    currentWeatherDisplay.style.display = "none";
+    forecastDays.textContent= "";
+    currentWeather.style.display = "none";
     forecastTitle.style.display = "none";
 });
 
 createCityList();
 
 //------------------------- Click handlers -------------------------//
-searchFormEl.addEventListener("submit", searchCity);
+
 searchHistory.addEventListener("click", renderSearchHistory);

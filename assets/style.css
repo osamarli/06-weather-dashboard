@@ -4,6 +4,11 @@ background: -webkit-linear-gradient(right, #111114, #8f9092);
 border: solid #6993e7;
 }
 
+#current-container {
+    border: solid #7b7e81;
+    background:-webkit-linear-gradient(right, #3271eebb, #7aa2f11a);
+}
+
 .btn {
   text-align: center;
   display: inline-block;
@@ -33,6 +38,7 @@ border: solid #6993e7;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  border: solid #6993e7;
 }
 
 .card-text {
@@ -56,7 +62,7 @@ border: solid #6993e7;
         font-size: 1.5vw;
     }
 
-    .forecast-cards {
+    #forecast-days {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
@@ -75,7 +81,7 @@ border: solid #6993e7;
         font-weight: bold;
     }
     
-    .forecast-cards {
+    #forecast-days {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
