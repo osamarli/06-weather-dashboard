@@ -42,10 +42,9 @@
 
         </section>
 
-
         <div class="col-lg-9">
             <!-- Search result for today weather-->
-            <section id="currentWeather-container" class="pb-2 m-auto col-10 border">
+            <section id="current-container" class="pb-2 m-auto col-10">
                 <div>
                     <p id="currentDay"></p>               
                     <h3 class="city-name"><span id="city-name"></span><img id="weather-icon" /></h3>
@@ -59,12 +58,11 @@
             </section>
 
             <!-- Search results for next five days -->
-            <section class="forecast-section bg-light m-1">
+            <section class="forecast-section m-1">
               <h3 id="city-name"></h3>  
               <h3 id="forecast-title">5-Day Forecast</h3>
-                <div id="forecast-container" class="fiveday-forecast">
-                    <div class="forecast-cards" id="card-deck">
-                        <img id="daily-icon" />
+                <div>
+                    <div id="forecast-days">
                         <!-- search results for next five days here -->
                     </div>
                 </div>
