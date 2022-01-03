@@ -36,8 +36,18 @@ var searchCity = function (event,cityName) {
         getCityWeather(cityName);
         cityInput.value = "";
         var searchedCity = JSON.parse(localStorage.getItem("CityList")) || [cityName];
+        // Checkk of the city name already in saved in the history 
+        var cityWork = [];
+        console.log(searchedCity);
+        for (i=1; i<searchedCity.length; i++) {
+            cityWork.push(searchedCity[i].city);
+            console.log(cityWork);
+        }
         var storedCities = {city: cityName};
-        searchedCity.push(storedCities);
+        // Save the city only if the city name is not in search history 
+        if (!cityWork.includes(cityName)) {
+            searchedCity.push(storedCities);
+        }
 
         localStorage.setItem("CityList", JSON.stringify(searchedCity));
     } else {
