@@ -28,7 +28,7 @@ var searchHistory = document.querySelector("#search-history");
 var deleteHistory = document.querySelector("#delete-history");
 
 
-//Search city input
+/Search city input
 var searchCity = function (event,cityName) {
     event.preventDefault();
     var cityName = cityInput.value;
